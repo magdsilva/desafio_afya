@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-const schema = Joi.object({
+const createPatientSchema = Joi.object({
   name: Joi.string()
     .max(150)
     .required(),
@@ -33,8 +33,14 @@ const schema = Joi.object({
     .required()
 })
 
-const validate = (data: unknown) => {
-  return schema.validate(data)
+const patientIdSchema = Joi.string()
+  .uuid()
+  .required()
+
+export const validate = (data: unknown) => {
+  return createPatientSchema.validate(data)
 }
 
-export { validate }
+export const validatePatientId = (id: unknown) => {
+  return patientIdSchema.validate(id)
+}
