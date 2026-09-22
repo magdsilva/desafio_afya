@@ -1,43 +1,108 @@
 # Desafio Afya
 
-Este é um projeto de desafio técnico.
+API REST desenvolvida em Node.js com TypeScript para gerenciamento de pacientes, consultas e observações clínicas.
 
-## Estrutura do Projeto
+## Tecnologias
 
-```
-src/
-├── config/           # Configurações da aplicação
-├── controllers/      # Controllers das rotas
-├── enums/            # Enumerações
-├── helpers/          # Funções auxiliares
-├── interfaces/       # Interfaces TypeScript
-├── middlewares/      # Middlewares Express
-├── repositories/     # Acesso a dados
-├── routes/           # Definição de rotas
-├── use-cases/        # Casos de uso (lógica de negócio)
-├── utils/            # Utilitários
-├── database/
-│   ├── migrations/   # Migrations do banco
-│   └── connection.ts # Configuração de conexão
-├── app.ts            # Configuração do Express
-└── index.ts          # Ponto de entrada
-```
+- Node.js
+- TypeScript
+- Express
+- PostgreSQL
+- Docker
+- Joi
+- JWT
+- Jest
 
-## Como Começar
+## Como executar
 
-1. Clone o repositório
-2. Instale as dependências: `npm install`
-3. Configure as variáveis de ambiente: copie `.env.example` para `.env`
-4. Inicie o servidor: `npm run dev`
-
-## Testes
+Instale as dependências:
 
 ```bash
-npm test
+npm install
 ```
 
-## Build
+Crie o arquivo `.env` com base no `.env.example`.
+
+Suba o PostgreSQL:
 
 ```bash
+docker compose up -d
+```
+
+Execute as migrations:
+
+```bash
+npm run migrate
+```
+
+Crie o usuário inicial:
+
+```bash
+npm run seed
+```
+
+Inicie a aplicação:
+
+```bash
+npm run dev
+```
+
+A API estará disponível em:
+
+```text
+http://localhost:3000
+```
+
+## Autenticação
+
+Para realizar login:
+
+```http
+POST /login
+```
+
+Exemplo:
+
+```json
+{
+  "email": "user_teste@afya.com",
+  "password": "123456"
+}
+```
+
+As rotas protegidas utilizam JWT:
+
+```text
+Authorization: Bearer <token>
+```
+
+## Scripts
+
+```bash
+npm run dev
 npm run build
+npm run migrate
+npm run seed
+npm test
+npm run lint
 ```
+
+## Estrutura
+
+```text
+src/
+├── config/
+├── controllers/
+├── database/
+├── interfaces/
+├── middlewares/
+├── repositories/
+├── routes/
+├── use-cases/
+├── app.ts
+└── index.ts
+```
+
+## Autor
+
+Marcus Silva
