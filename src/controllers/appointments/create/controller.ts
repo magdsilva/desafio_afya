@@ -15,14 +15,18 @@ const createAppointmentController = async (
     })
   }
 
-  const userId =  request.userId as string
-
-  const appointment = await createAppointment({
-    userId,
+  const { appointment, conflict } = await createAppointment({
+    userId: request.userId as string,
     patientId: value.patientId,
     date: value.date,
     time: value.time
   })
+
+  if (conflict) {
+    return response.status(409).json({
+      message: 'Appointment time is not available'
+    })
+  }
 
   if (!appointment) {
     return response.status(404).json({
