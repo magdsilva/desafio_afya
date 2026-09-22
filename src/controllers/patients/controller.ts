@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { createPatient } from '../../use-cases/patients'
+import { createPatient, getPatients } from '../../use-cases/patients'
 import { validate } from './validate'
 
 export const createPatientController = async (
@@ -18,4 +18,13 @@ export const createPatientController = async (
   const patient = await createPatient(value)
 
   return response.status(201).json(patient)
+}
+
+export const getPatientsController = async (
+  _request: Request,
+  response: Response
+): Promise<Response> => {
+  const patients = await getPatients()
+
+  return response.status(200).json(patients)
 }
