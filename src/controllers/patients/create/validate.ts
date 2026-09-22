@@ -33,14 +33,6 @@ const createPatientSchema = Joi.object({
     .required()
 })
 
-const patientIdSchema = Joi.string()
-  .uuid()
-  .required()
-
 export const validate = (data: unknown) => {
   return createPatientSchema.validate(data)
-}
-
-export const validatePatientId = (id: unknown) => {
-  return patientIdSchema.validate(id)
 }

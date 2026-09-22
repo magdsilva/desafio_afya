@@ -1,7 +1,7 @@
-import { database } from '../config/database'
-import { User } from '../interfaces/users'
+import { database } from '../../config/database'
+import { User } from '../../interfaces/users'
 
-const getUserByEmail = async (
+export const getUserByEmail = async (
   email: string
 ): Promise<User | null> => {
   const result = await database.query(
@@ -26,5 +26,3 @@ const getUserByEmail = async (
 
   return result.rows[0] as User
 }
-
-export { getUserByEmail }
