@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: desafio-afya-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: desafio_afya
+      POSTGRES_USER: msilva_afya
+      POSTGRES_PASSWORD: msilva_afya_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
