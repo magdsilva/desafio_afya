@@ -18,8 +18,8 @@ describe('getPatientById repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [id])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("WHERE id = $1")
-    expect(sql).toContain("AND deleted_at IS NULL")
+    expect(sql).toContain('WHERE id = $1')
+    expect(sql).toContain('AND deleted_at IS NULL')
   })
 
   it('propagates database failures', async () => {

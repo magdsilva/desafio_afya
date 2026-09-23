@@ -18,8 +18,8 @@ describe('createConsultationNote repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [id, note.description])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("INSERT INTO consultation_notes")
-    expect(sql).toContain("VALUES ($1, $2)")
+    expect(sql).toContain('INSERT INTO consultation_notes')
+    expect(sql).toContain('VALUES ($1, $2)')
   })
 
   it('propagates database failures', async () => {

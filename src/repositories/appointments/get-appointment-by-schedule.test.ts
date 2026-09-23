@@ -18,8 +18,8 @@ describe('getAppointmentBySchedule repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [userId, '2026-10-01T09:30:00'])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("WHERE user_id = $1")
-    expect(sql).toContain("AND scheduled_at = $2")
+    expect(sql).toContain('WHERE user_id = $1')
+    expect(sql).toContain('AND scheduled_at = $2')
   })
 
   it('propagates database failures', async () => {

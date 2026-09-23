@@ -12,7 +12,7 @@ const updateAppointmentMocked = jest.mocked(updateAppointment)
 const validateMocked = jest.mocked(validate)
 const validateAppointmentIdMocked = jest.mocked(validateAppointmentId)
 const validationError = new ValidationError('Invalid input', [{ message: 'Invalid input', path: [], type: 'any.invalid' }], {})
-const value = { time: "10:00" }
+const value = { time: '10:00' }
 
 beforeEach(() => {
   jest.resetAllMocks()

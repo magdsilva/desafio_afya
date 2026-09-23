@@ -12,7 +12,7 @@ const updatePatientMocked = jest.mocked(updatePatient)
 const validateMocked = jest.mocked(validate)
 const validatePatientIdMocked = jest.mocked(validatePatientId)
 const validationError = new ValidationError('Invalid input', [{ message: 'Invalid input', path: [], type: 'any.invalid' }], {})
-const value = { name: "Updated" }
+const value = { name: 'Updated' }
 
 beforeEach(() => {
   jest.resetAllMocks()

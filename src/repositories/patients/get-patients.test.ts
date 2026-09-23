@@ -18,9 +18,9 @@ describe('getPatients repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String))
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("FROM patients")
-    expect(sql).toContain("WHERE deleted_at IS NULL")
-    expect(sql).toContain("ORDER BY name")
+    expect(sql).toContain('FROM patients')
+    expect(sql).toContain('WHERE deleted_at IS NULL')
+    expect(sql).toContain('ORDER BY name')
   })
 
   it('propagates database failures', async () => {
