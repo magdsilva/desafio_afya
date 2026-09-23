@@ -77,24 +77,12 @@ npm install
 
 Crie o arquivo `.env` utilizando `.env.example` como referência.
 
-Exemplo para execução local:
-
-```env
-PORT=3000
-
-DATABASE_HOST=localhost
-DATABASE_PORT=5433
-DATABASE_NAME=desafio_afya
-DATABASE_USER=msilva_afya
-DATABASE_PASSWORD=msilva_afya_pass
-
-SEED_USER_NAME=Usuário Para Testes
-SEED_USER_EMAIL=user_teste@afya.com
-SEED_USER_PASSWORD=123456
-
-JWT_SECRET=defina-uma-chave-secreta
-JWT_EXPIRES_IN=1h
+```bash
+cp .env.example .env
 ```
+
+Preencha as variáveis de ambiente conforme necessário para o ambiente local.
+
 
 Suba o PostgreSQL utilizando Docker:
 
@@ -183,25 +171,18 @@ Para executar:
 npm test
 ```
 
-Para executar em modo watch:
-
-```bash
-npm run test:watch
-```
-
 ## Scripts
 
 ```bash
-npm run dev        # Executa a aplicação em desenvolvimento
-npm run build      # Compila o TypeScript
-npm start          # Executa a versão compilada
-npm run migrate    # Executa as migrations
-npm run seed       # Cria o usuário inicial
-npm test           # Executa os testes
-npm run test:watch # Executa os testes em modo watch
-npm run lint       # Executa o ESLint
+npm run dev           # Executa a aplicação em desenvolvimento
+npm run build         # Compila o TypeScript
+npm start             # Executa a versão compilada
+npm run migrate       # Executa as migrations
+npm run seed          # Cria o usuário inicial
+npm test              # Executa os testes
+npm run test:coverage # Executa os testes e gera o relatório de cobertura
+npm run lint          # Executa o ESLint
 ```
 
 ## Autor
-
 Marcus Antônio G Silva
