@@ -1,6 +1,6 @@
 import { validate } from './validate'
 
-describe('validate', () => {
+describe('Controller - validate', () => {
   const valid = { email: 'doctor@example.com', password: '123456' }
 
   it('accepts valid input', () => {

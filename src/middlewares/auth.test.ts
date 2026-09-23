@@ -12,7 +12,7 @@ beforeEach(() => {
   verifyMocked.mockImplementation(() => ({ sub: userId }))
 })
 
-describe('auth', () => {
+describe('Middleware - auth', () => {
   it('sets the authenticated user and calls next', () => {
     const request = createRequest({ headers: { authorization: 'Bearer token' }, userId: undefined })
     const response = createResponse()

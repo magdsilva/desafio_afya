@@ -19,7 +19,7 @@ beforeEach(() => {
   validatePatientIdMocked.mockReturnValue({ value: id, error: undefined })
 })
 
-describe('getPatientByIdController', () => {
+describe('Controller - controller', () => {
   it('returns 200 and passes the expected input to the use case', async () => {
     const request = createRequest({ body: {} })
     const response = createResponse()

@@ -1,7 +1,7 @@
 import { validatePatientId } from './validate'
 import { id } from '../../../__test-support__/fixtures'
 
-describe('validatePatientId', () => {
+describe('Controller - validate', () => {
   it('accepts a UUID', () => {
     expect(validatePatientId(id)).toEqual({ value: id })
   })

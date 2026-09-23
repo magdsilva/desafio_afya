@@ -21,7 +21,7 @@ beforeEach(() => {
   signMocked.mockImplementation(() => 'signed-token')
 })
 
-describe('login', () => {
+describe('Use Case - login', () => {
   it('checks the password and signs a token with the user id', async () => {
     await expect(login(credentials)).resolves.toEqual({ token: 'signed-token' })
     expect(getUserByEmailMocked).toHaveBeenCalledWith(credentials.email)

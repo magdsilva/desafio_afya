@@ -9,7 +9,7 @@ const queryMocked = jest.mocked(database.query as DatabaseQuery)
 
 beforeEach(() => { queryMocked.mockReset() })
 
-describe('updatePatient repository', () => {
+describe('Repository - update-patient', () => {
   it('executes a parameterized query and returns the result', async () => {
     queryMocked.mockResolvedValue({ rows: [patient], rowCount: 1 })
 

@@ -19,7 +19,7 @@ beforeEach(() => {
   updateAppointmentMocked.mockResolvedValue(appointment)
 })
 
-describe('updateAppointment', () => {
+describe('Use Case - update-appointment', () => {
   it('stops when the appointment is not found for the user', async () => {
     getAppointmentByIdMocked.mockResolvedValue(null)
     await expect(updateAppointment(id, userId, { status: 'COMPLETED' })).resolves.toEqual({ appointment: null, conflict: false })

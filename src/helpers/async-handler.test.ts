@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { asyncHandler } from './async-handler'
 import { createRequest, createResponse } from '../__test-support__/http'
 
-describe('asyncHandler', () => {
+describe('Helper - async-handler', () => {
   it('forwards the request, response and next to the handler', async () => {
     const handler = jest.fn<Promise<unknown>, [Request, Response, NextFunction]>()
     const handlerMocked = jest.mocked(handler)
