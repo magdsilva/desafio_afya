@@ -4,7 +4,7 @@ import { app } from './app'
 import { connectDatabase } from './config/database'
 import { errorDetails, logger } from './config/logger'
 
-const PORT = Number(process.env.PORT)
+const PORT = Number(process.env.PORT|| 3000)
 
 const startServer = async (): Promise<void> => {
   try {

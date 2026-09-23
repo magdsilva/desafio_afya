@@ -10,6 +10,10 @@ const swaggerSpec = swaggerJsdoc({
     },
     servers: [
       {
+        url: 'https://desafio-afya-api-zjwb.onrender.com',
+        description: 'Render'
+      },
+      {
         url: 'http://localhost:3000',
         description: 'Local'
       }
