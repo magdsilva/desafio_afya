@@ -113,7 +113,7 @@ npm run dev
 A API estará disponível em:
 
 ```text
-https://desafio-afya-api-zjwb.onrender.com
+https://localhost:3000
 ```
 
 ## Deploy
