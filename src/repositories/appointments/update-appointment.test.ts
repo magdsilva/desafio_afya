@@ -19,9 +19,9 @@ describe('updateAppointment repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [id, userId, '2026-10-01T09:30:00', 'SCHEDULED'])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("UPDATE appointments")
-    expect(sql).toContain("WHERE id = $1")
-    expect(sql).toContain("AND user_id = $2")
+    expect(sql).toContain('UPDATE appointments')
+    expect(sql).toContain('WHERE id = $1')
+    expect(sql).toContain('AND user_id = $2')
   })
 
   it('propagates database failures', async () => {

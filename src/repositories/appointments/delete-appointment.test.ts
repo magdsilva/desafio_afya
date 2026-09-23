@@ -18,9 +18,9 @@ describe('deleteAppointment repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [id, userId])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("DELETE FROM appointments")
-    expect(sql).toContain("WHERE id = $1")
-    expect(sql).toContain("AND user_id = $2")
+    expect(sql).toContain('DELETE FROM appointments')
+    expect(sql).toContain('WHERE id = $1')
+    expect(sql).toContain('AND user_id = $2')
   })
 
   it('propagates database failures', async () => {

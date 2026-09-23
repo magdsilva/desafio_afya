@@ -3,7 +3,7 @@ import { deleteAppointment } from '../../../use-cases/appointments/delete-appoin
 import { validateAppointmentId } from './validate'
 import { ValidationError } from 'joi'
 import { createRequest, createResponse } from '../../../__test-support__/http'
-import { id, userId, appointment } from '../../../__test-support__/fixtures'
+import { id, userId } from '../../../__test-support__/fixtures'
 
 jest.mock('../../../use-cases/appointments/delete-appointment')
 jest.mock('./validate')

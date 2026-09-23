@@ -1,7 +1,7 @@
 import { DatabaseQuery } from '../../__test-support__/database'
 import { database } from '../../config/database'
 import { getPatientAppointmentHistory } from './get-patient-appointment-history'
-import { id, userId, patient, appointment, history } from '../../__test-support__/fixtures'
+import { id, userId, history } from '../../__test-support__/fixtures'
 
 jest.mock('../../config/database', () => ({ database: { query: jest.fn() } }))
 
@@ -18,10 +18,10 @@ describe('getPatientAppointmentHistory repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [id, userId])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("LEFT JOIN consultation_notes")
-    expect(sql).toContain("WHERE a.patient_id = $1")
-    expect(sql).toContain("AND a.user_id = $2")
-    expect(sql).toContain("ORDER BY a.scheduled_at DESC")
+    expect(sql).toContain('LEFT JOIN consultation_notes')
+    expect(sql).toContain('WHERE a.patient_id = $1')
+    expect(sql).toContain('AND a.user_id = $2')
+    expect(sql).toContain('ORDER BY a.scheduled_at DESC')
     expect(sql).toContain("'[]'::json")
   })
 

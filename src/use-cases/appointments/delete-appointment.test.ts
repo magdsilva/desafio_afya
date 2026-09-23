@@ -1,6 +1,6 @@
 import { deleteAppointment } from './delete-appointment'
 import { deleteAppointment as deleteAppointmentRepository } from '../../repositories/appointments/delete-appointment'
-import { id, userId, appointment } from '../../__test-support__/fixtures'
+import { id, userId } from '../../__test-support__/fixtures'
 
 jest.mock('../../repositories/appointments/delete-appointment')
 const deleteAppointmentMocked = jest.mocked(deleteAppointmentRepository)

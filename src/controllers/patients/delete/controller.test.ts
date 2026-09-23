@@ -3,7 +3,7 @@ import { deletePatient } from '../../../use-cases/patients/delete-patient'
 import { validatePatientId } from './validate'
 import { ValidationError } from 'joi'
 import { createRequest, createResponse } from '../../../__test-support__/http'
-import { id, patient } from '../../../__test-support__/fixtures'
+import { id } from '../../../__test-support__/fixtures'
 
 jest.mock('../../../use-cases/patients/delete-patient')
 jest.mock('./validate')

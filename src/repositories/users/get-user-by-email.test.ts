@@ -18,8 +18,8 @@ describe('getUserByEmail repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [user.email])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("FROM users")
-    expect(sql).toContain("WHERE email = $1")
+    expect(sql).toContain('FROM users')
+    expect(sql).toContain('WHERE email = $1')
   })
 
   it('propagates database failures', async () => {

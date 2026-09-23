@@ -11,11 +11,11 @@ jest.mock('./validate')
 const loginMocked = jest.mocked(login)
 const validateMocked = jest.mocked(validate)
 const validationError = new ValidationError('Invalid input', [{ message: 'Invalid input', path: [], type: 'any.invalid' }], {})
-const value = { email: user.email, password: "password123" }
+const value = { email: user.email, password: 'password123' }
 
 beforeEach(() => {
   jest.resetAllMocks()
-  loginMocked.mockResolvedValue({ token: "token" })
+  loginMocked.mockResolvedValue({ token: 'token' })
   validateMocked.mockReturnValue({ value, error: undefined })
 })
 
@@ -28,7 +28,7 @@ describe('loginController', () => {
     expect(loginMocked).toHaveBeenCalledWith({ email: value.email, password: value.password })
     expect(validateMocked).toHaveBeenCalledWith(request.body)
     expect(response.status).toHaveBeenCalledWith(200)
-    expect(response.json).toHaveBeenCalledWith({ token: "token" })
+    expect(response.json).toHaveBeenCalledWith({ token: 'token' })
   })
 
   it('returns the validation message without calling the use case', async () => {

@@ -18,8 +18,8 @@ describe('getAppointments repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [userId])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("WHERE user_id = $1")
-    expect(sql).toContain("ORDER BY scheduled_at ASC")
+    expect(sql).toContain('WHERE user_id = $1')
+    expect(sql).toContain('ORDER BY scheduled_at ASC')
   })
 
   it('propagates database failures', async () => {

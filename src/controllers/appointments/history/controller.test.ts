@@ -3,7 +3,7 @@ import { getPatientAppointmentHistory } from '../../../use-cases/appointments/ge
 import { validatePatientId } from './validate'
 import { ValidationError } from 'joi'
 import { createRequest, createResponse } from '../../../__test-support__/http'
-import { id, userId, patient, appointment, history } from '../../../__test-support__/fixtures'
+import { id, userId, history } from '../../../__test-support__/fixtures'
 
 jest.mock('../../../use-cases/appointments/get-patient-appointment-history')
 jest.mock('./validate')

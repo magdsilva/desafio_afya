@@ -19,8 +19,8 @@ describe('createAppointment repository', () => {
     expect(queryMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith(expect.any(String), [userId, id, '2026-10-01T09:30:00'])
     const sql = String(queryMocked.mock.calls[0][0]).replace(/\s+/g, ' ')
-    expect(sql).toContain("INSERT INTO appointments")
-    expect(sql).toContain("VALUES ($1, $2, $3)")
+    expect(sql).toContain('INSERT INTO appointments')
+    expect(sql).toContain('VALUES ($1, $2, $3)')
   })
 
   it('propagates database failures', async () => {

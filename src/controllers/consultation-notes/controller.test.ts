@@ -3,7 +3,7 @@ import { createConsultationNote } from '../../use-cases/consultation-notes/creat
 import { validate, validateAppointmentId } from './validate'
 import { ValidationError } from 'joi'
 import { createRequest, createResponse } from '../../__test-support__/http'
-import { id, userId, appointment, note } from '../../__test-support__/fixtures'
+import { id, userId, note } from '../../__test-support__/fixtures'
 
 jest.mock('../../use-cases/consultation-notes/create-consultation-note')
 jest.mock('./validate')
