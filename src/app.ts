@@ -24,6 +24,4 @@ app.use(
 
 app.use(errorHandler)
 
-app.use(errorHandler)
-
 export { app }
