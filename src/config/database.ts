@@ -1,4 +1,5 @@
 import { Pool } from 'pg'
+import { errorDetails, logger } from './logger'
 
 export const database = new Pool({
   host: process.env.DATABASE_HOST,
@@ -9,7 +10,7 @@ export const database = new Pool({
 })
 
 database.on('error', (error) => {
-  console.error('Unexpected database error:', error)
+  logger.error('database.error', { error: errorDetails(error) })
 })
 
 const connectDatabase = async (): Promise<void> => {
@@ -17,7 +18,7 @@ const connectDatabase = async (): Promise<void> => {
 
   try {
     await client.query('SELECT 1')
-    console.log('Database connected successfully')
+    logger.info('database.connected')
   } finally {
     client.release()
   }

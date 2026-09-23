@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { getUserByEmail } from '../repositories/users/get-user-by-email'
+import { logger } from '../config/logger'
 
 
 interface LoginInput {
@@ -41,6 +42,12 @@ export const login = async ({
       expiresIn: '1h'
     }
   )
+
+  logger.info({
+    event: 'login.authenticated',
+    message: 'User authenticated successfully',
+    user_id: user.id,
+  })
 
   return {
     token

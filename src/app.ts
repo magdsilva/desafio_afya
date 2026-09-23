@@ -4,12 +4,14 @@ import { loginRoutes } from './routes/login'
 import { patientsRoutes } from './routes/patients'
 import { appointmentsRoutes } from './routes/appointments'
 import { errorHandler } from './middlewares/error-handler'
+import { requestLogger } from './middlewares/request-logger'
 
 import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from './docs/swagger'
 
 const app = express()
 
+app.use(requestLogger)
 app.use(express.json())
 
 app.use('/login', loginRoutes)

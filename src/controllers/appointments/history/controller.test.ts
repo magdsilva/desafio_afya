@@ -4,9 +4,11 @@ import { validatePatientId } from './validate'
 import { ValidationError } from 'joi'
 import { createRequest, createResponse } from '../../../__test-support__/http'
 import { id, userId, history } from '../../../__test-support__/fixtures'
+import { logger } from '../../../config/logger'
 
 jest.mock('../../../use-cases/appointments/get-patient-appointment-history')
 jest.mock('./validate')
+jest.mock('../../../config/logger')
 
 const getPatientAppointmentHistoryMocked = jest.mocked(getPatientAppointmentHistory)
 const validatePatientIdMocked = jest.mocked(validatePatientId)
@@ -29,6 +31,17 @@ describe('Controller - controller', () => {
     expect(validatePatientIdMocked).toHaveBeenCalledWith(id)
     expect(response.status).toHaveBeenCalledWith(200)
     expect(response.json).toHaveBeenCalledWith(history)
+    expect(logger.info).toHaveBeenNthCalledWith(1, {
+      event: 'get_patient_appointment_history.started',
+      message: 'Request started: get patient appointment history',
+      user_id: userId,
+    })
+    expect(logger.info).toHaveBeenNthCalledWith(2, {
+      event: 'get_patient_appointment_history.completed',
+      message: 'Request completed: get patient appointment history',
+      user_id: userId,
+      status_code: 200,
+    })
   })
 
   it('rejects an invalid patient id before calling the use case', async () => {
@@ -38,6 +51,9 @@ describe('Controller - controller', () => {
     expect(response.status).toHaveBeenCalledWith(400)
     expect(response.json).toHaveBeenCalledWith({ message: 'Invalid patient id' })
     expect(getPatientAppointmentHistoryMocked).not.toHaveBeenCalled()
+    expect(logger.warn).toHaveBeenCalledWith(expect.objectContaining({
+      event: 'get_patient_appointment_history.validation_failed', user_id: userId, status_code: 400,
+    }))
   })
 
   it('returns 404 when the resource does not exist', async () => {
@@ -47,6 +63,9 @@ describe('Controller - controller', () => {
     expect(response.status).toHaveBeenCalledWith(404)
     expect(response.json).toHaveBeenCalledWith({ message: 'Patient not found' })
     expect(response.send).not.toHaveBeenCalled()
+    expect(logger.warn).toHaveBeenCalledWith(expect.objectContaining({
+      event: 'get_patient_appointment_history.not_found', user_id: userId, status_code: 404,
+    }))
   })
 
   it('propagates unexpected failures to the async handler', async () => {
