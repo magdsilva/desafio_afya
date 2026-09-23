@@ -31,7 +31,9 @@ describe('Config - database', () => {
     const listener = on.mock.calls[0][1] as (error: Error) => void
     const error = new Error('Connection lost')
     listener(error)
-    expect(jest.mocked(console.error)).toHaveBeenCalledWith('Unexpected database error:', error)
+    expect(JSON.parse(jest.mocked(console.error).mock.calls[0][0])).toMatchObject({
+      event: 'database.error', level: 'error', error: { message: error.message, stack: error.stack },
+    })
   })
 
   it('checks the connection and releases the client', async () => {
@@ -44,7 +46,9 @@ describe('Config - database', () => {
     expect(connectMocked).toHaveBeenCalledTimes(1)
     expect(queryMocked).toHaveBeenCalledWith('SELECT 1')
     expect(releaseMocked).toHaveBeenCalledTimes(1)
-    expect(jest.mocked(console.log)).toHaveBeenCalledWith('Database connected successfully')
+    expect(JSON.parse(jest.mocked(console.log).mock.calls[0][0])).toMatchObject({
+      event: 'database.connected', level: 'info',
+    })
   })
 
   it('releases the client even if the health query fails', async () => {

@@ -2,9 +2,11 @@ import { getPatientAppointmentHistory } from './get-patient-appointment-history'
 import { getPatientAppointmentHistory as getPatientAppointmentHistoryRepository } from '../../repositories/appointments/get-patient-appointment-history'
 import { patientExists } from '../../repositories/patients/patient-exists'
 import { id, userId, history } from '../../__test-support__/fixtures'
+import { logger } from '../../config/logger'
 
 jest.mock('../../repositories/patients/patient-exists')
 jest.mock('../../repositories/appointments/get-patient-appointment-history')
+jest.mock('../../config/logger')
 
 const patientExistsMocked = jest.mocked(patientExists)
 const getPatientAppointmentHistoryMocked = jest.mocked(
@@ -36,6 +38,12 @@ describe('Use Case - get-patient-appointment-history', () => {
       expect(
         getPatientAppointmentHistoryMocked
       ).toHaveBeenCalledWith(id, userId)
+      expect(logger.info).toHaveBeenCalledWith({
+        event: 'patient_history.fetched',
+        message: 'Patient appointment history fetched',
+        user_id: userId,
+        result_count: result.length,
+      })
     }
   )
 
@@ -52,6 +60,10 @@ describe('Use Case - get-patient-appointment-history', () => {
     expect(
       getPatientAppointmentHistoryMocked
     ).not.toHaveBeenCalled()
+    expect(logger.warn).toHaveBeenCalledWith(expect.objectContaining({
+      event: 'patient_history.patient_not_found', user_id: userId,
+    }))
+    expect(logger.info).not.toHaveBeenCalled()
   })
 
   it.each([
