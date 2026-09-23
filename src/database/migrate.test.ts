@@ -38,7 +38,7 @@ beforeEach(() => {
   queryMocked.mockResolvedValue({ rows: [], rowCount: 0 })
 })
 
-describe('migrate', () => {
+describe('Database - migrate', () => {
   it('applies only SQL files in filename order within transactions', async () => {
     readdirMocked.mockResolvedValue(['002.sql', 'README.md', '001.sql'])
     readFileMocked.mockResolvedValueOnce('SQL ONE').mockResolvedValueOnce('SQL TWO')

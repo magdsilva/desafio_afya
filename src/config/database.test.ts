@@ -14,7 +14,7 @@ beforeEach(() => {
   connectMocked.mockReset()
 })
 
-describe('database', () => {
+describe('Config - database', () => {
   it('configures the pool with environment variables and registers an error listener', () => {
     jest.replaceProperty(process, 'env', {
       ...process.env, DATABASE_HOST: 'test-host', DATABASE_PORT: '5433',

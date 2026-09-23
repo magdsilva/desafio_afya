@@ -7,7 +7,7 @@ const deleteAppointmentMocked = jest.mocked(deleteAppointmentRepository)
 
 beforeEach(() => { deleteAppointmentMocked.mockReset() })
 
-describe('deleteAppointment', () => {
+describe('Use Case - delete-appointment', () => {
   it('passes the input to the repository and returns its result', async () => {
     deleteAppointmentMocked.mockResolvedValue(true)
     await expect(deleteAppointment(id, userId)).resolves.toEqual(true)

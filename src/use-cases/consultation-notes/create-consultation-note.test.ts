@@ -15,7 +15,7 @@ beforeEach(() => {
   createConsultationNoteMocked.mockResolvedValue(note)
 })
 
-describe('createConsultationNote', () => {
+describe('Use Case - create-consultation-note', () => {
   it('creates a note for an appointment belonging to the user', async () => {
     await expect(createConsultationNote(id, userId, note.description)).resolves.toEqual(note)
     expect(getAppointmentByIdMocked).toHaveBeenCalledWith(id, userId)

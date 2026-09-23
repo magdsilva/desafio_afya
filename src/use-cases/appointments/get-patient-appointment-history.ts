@@ -1,6 +1,6 @@
 import { PatientAppointmentHistory } from '../../interfaces/appointments'
 
-import { getPatientById } from '../../repositories/patients/get-patient-by-id'
+import { patientExists } from '../../repositories/patients/patient-exists'
 import {
   getPatientAppointmentHistory as getPatientAppointmentHistoryRepository
 } from '../../repositories/appointments/get-patient-appointment-history'
@@ -14,9 +14,9 @@ const getPatientAppointmentHistory = async (
   patientId: string,
   userId: string
 ): Promise<PatientAppointmentHistoryResult> => {
-  const patient = await getPatientById(patientId)
+  const exists = await patientExists(patientId)
 
-  if (!patient) {
+  if (!exists) {
     return {
       history: [],
       patientFound: false

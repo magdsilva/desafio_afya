@@ -7,7 +7,7 @@ const updatePatientMocked = jest.mocked(updatePatientRepository)
 
 beforeEach(() => { updatePatientMocked.mockReset() })
 
-describe('updatePatient', () => {
+describe('Use Case - update-patient', () => {
   it('passes the input to the repository and returns its result', async () => {
     updatePatientMocked.mockResolvedValue(patient)
     await expect(updatePatient(id, patientInput)).resolves.toEqual(patient)

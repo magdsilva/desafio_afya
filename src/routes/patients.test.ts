@@ -40,7 +40,7 @@ beforeEach(() => {
   router = RouterMocked.mock.results[0].value
 })
 
-describe('patientsRoutes', () => {
+describe('Route - patients', () => {
   it('exports the configured router with all expected endpoints', () => {
     expect(RouterMocked).toHaveBeenCalledTimes(1)
     expect(exportedRouter).toBe(router)

@@ -1,7 +1,7 @@
 import { errorHandler } from './error-handler'
 import { createRequest, createResponse } from '../__test-support__/http'
 
-describe('errorHandler', () => {
+describe('Middleware - error-handler', () => {
   it('logs the error and returns a generic 500 response', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
     const errorMocked = jest.mocked(console.error)

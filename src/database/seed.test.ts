@@ -29,7 +29,7 @@ beforeEach(() => {
   endMocked.mockResolvedValue(undefined)
 })
 
-describe('seed', () => {
+describe('Database - seed', () => {
   it('hashes the password, inserts the user and closes the pool', async () => {
     await runSeed()
     expect(hashMocked).toHaveBeenCalledWith('password123', 10)

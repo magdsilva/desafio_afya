@@ -19,7 +19,7 @@ beforeEach(() => {
   createAppointmentMocked.mockResolvedValue(appointment)
 })
 
-describe('createAppointment', () => {
+describe('Use Case - create-appointment', () => {
   it('creates an appointment with the combined date and time', async () => {
     await expect(createAppointment(appointmentInput)).resolves.toEqual({ appointment, conflict: false })
     expect(getPatientByIdMocked).toHaveBeenCalledWith(id)

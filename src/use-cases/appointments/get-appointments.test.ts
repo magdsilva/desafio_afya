@@ -7,7 +7,7 @@ const getAppointmentsMocked = jest.mocked(getAppointmentsRepository)
 
 beforeEach(() => { getAppointmentsMocked.mockReset() })
 
-describe('getAppointments', () => {
+describe('Use Case - get-appointments', () => {
   it('passes the input to the repository and returns its result', async () => {
     getAppointmentsMocked.mockResolvedValue([appointment])
     await expect(getAppointments(userId)).resolves.toEqual([appointment])

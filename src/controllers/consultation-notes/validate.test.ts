@@ -1,7 +1,7 @@
 import { validate, validateAppointmentId } from './validate'
 import { id } from '../../__test-support__/fixtures'
 
-describe('validateAppointmentId', () => {
+describe('Controller - validate', () => {
   it('accepts a UUID', () => {
     expect(validateAppointmentId(id)).toEqual({ value: id })
   })
@@ -11,7 +11,7 @@ describe('validateAppointmentId', () => {
   })
 })
 
-describe('validate', () => {
+describe('Controller - validate', () => {
   const valid = { description: 'Consultation note' }
 
   it('accepts valid input', () => {

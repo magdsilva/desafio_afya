@@ -21,7 +21,7 @@ beforeEach(() => {
   validateAppointmentIdMocked.mockReturnValue({ value: id, error: undefined })
 })
 
-describe('createConsultationNoteController', () => {
+describe('Controller - controller', () => {
   it('returns 201 and passes the expected input to the use case', async () => {
     const request = createRequest({ body: { raw: 'input' } })
     const response = createResponse()

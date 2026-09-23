@@ -1,7 +1,7 @@
 import { validate } from './validate'
 import { patientInput } from '../../../__test-support__/fixtures'
 
-describe('validate', () => {
+describe('Controller - validate', () => {
   const valid = patientInput
 
   it('accepts valid input', () => {
