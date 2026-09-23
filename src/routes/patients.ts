@@ -6,6 +6,8 @@ import { getPatientByIdController } from '../controllers/patients/details/contro
 import { updatePatientController } from '../controllers/patients/update/controller'
 import { deletePatientController } from '../controllers/patients/delete/controller'
 
+import { getPatientAppointmentHistoryController } from '../controllers/appointments/history/controller'
+
 import { auth } from '../middlewares/auth'
 
 const patientsRoutes = Router()
@@ -15,5 +17,11 @@ patientsRoutes.get('/', auth, getPatientsController)
 patientsRoutes.get('/:id', auth, getPatientByIdController)
 patientsRoutes.put('/:id', auth, updatePatientController)
 patientsRoutes.delete('/:id', auth, deletePatientController)
+
+patientsRoutes.get(
+  '/:id/appointments',
+  auth,
+  getPatientAppointmentHistoryController
+)
 
 export { patientsRoutes }
