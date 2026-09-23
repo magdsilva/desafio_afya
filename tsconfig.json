@@ -19,7 +19,5 @@
   "exclude": [
     "node_modules",
     "dist",
-    "src/**/*.test.ts",
-    "src/__test-support__/**"
   ]
 }
