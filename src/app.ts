@@ -5,6 +5,9 @@ import { patientsRoutes } from './routes/patients'
 import { appointmentsRoutes } from './routes/appointments'
 import { errorHandler } from './middlewares/error-handler'
 
+import swaggerUi from 'swagger-ui-express'
+import { swaggerSpec } from './docs/swagger'
+
 const app = express()
 
 app.use(express.json())
@@ -12,6 +15,14 @@ app.use(express.json())
 app.use('/login', loginRoutes)
 app.use('/patients', patientsRoutes)
 app.use('/appointments', appointmentsRoutes)
+
+app.use(
+  '/docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec)
+)
+
+app.use(errorHandler)
 
 app.use(errorHandler)
 
