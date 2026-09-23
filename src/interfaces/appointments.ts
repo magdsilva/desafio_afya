@@ -15,3 +15,9 @@ export interface Appointment {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface UpdateAppointmentInput {
+  date?: string
+  time?: string
+  status?: string
+}
