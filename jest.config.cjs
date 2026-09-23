@@ -13,6 +13,7 @@ const config = {
     '!src/app.ts',
     '!src/interfaces/**',
     '!src/**/*.test.ts',
+    '!src/docs/**',
     '!src/__test-support__/**',
   ],
   coverageDirectory: 'coverage',
