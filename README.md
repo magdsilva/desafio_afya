@@ -18,6 +18,7 @@ O projeto foi desenvolvido como parte do desafio técnico da Afya, priorizando o
 - Jest
 - Swagger / OpenAPI
 - ESLint
+- GitHub Actions
 
 ## Funcionalidades
 
@@ -30,7 +31,8 @@ A API disponibiliza:
 - validação de conflito de horários na agenda;
 - listagem, atualização e exclusão de consultas;
 - registro de observações durante uma consulta;
-- histórico de consultas do paciente.
+- histórico de consultas e observações do paciente;
+- preservação do histórico de atendimentos após a anonimização do paciente.
 
 ## Arquitetura
 
@@ -41,7 +43,7 @@ src/
 ├── config/          # Configurações da aplicação e banco
 ├── controllers/     # Entrada e saída das requisições HTTP
 ├── database/        # Migrations, seed e configuração do banco
-├── docs/            # Configuração e documentação Swagger
+├── docs/            # Documentação Swagger e diagrama do banco
 ├── helpers/         # Funções auxiliares
 ├── interfaces/      # Interfaces TypeScript
 ├── middlewares/     # Autenticação e tratamento de erros
@@ -75,14 +77,13 @@ Clone o repositório e instale as dependências:
 npm install
 ```
 
-Crie o arquivo `.env` utilizando `.env.example` como referência.
+Crie o arquivo `.env` utilizando `.env.example` como referência:
 
 ```bash
 cp .env.example .env
 ```
 
 Preencha as variáveis de ambiente conforme necessário para o ambiente local.
-
 
 Suba o PostgreSQL utilizando Docker:
 
@@ -131,7 +132,7 @@ Exemplo de requisição:
 }
 ```
 
-As demais rotas protegidas devem enviar o token:
+As demais rotas protegidas devem enviar o token no header:
 
 ```text
 Authorization: Bearer <token>
@@ -156,10 +157,12 @@ As migrations são executadas em ordem e registradas no banco para evitar execu�
 O diagrama e a descrição da modelagem estão disponíveis em:
 
 ```text
-docs/database.md
+src/docs/database.md
 ```
 
-A exclusão de pacientes utiliza exclusão lógica e anonimização dos dados pessoais, mantendo os relacionamentos necessários para preservar o histórico de consultas.
+A exclusão de pacientes utiliza exclusão lógica e anonimização dos dados pessoais. O histórico de consultas e observações permanece preservado e pode continuar sendo consultado após a anonimização.
+
+A agenda também possui uma restrição de unicidade por usuário e horário, evitando o agendamento de mais de um paciente no mesmo horário.
 
 ## Testes
 
@@ -169,6 +172,43 @@ Para executar:
 
 ```bash
 npm test
+```
+
+Para executar os testes e gerar o relatório de cobertura:
+
+```bash
+npm run test:coverage
+```
+
+## Qualidade de código
+
+O projeto utiliza ESLint para análise estática do código.
+
+```bash
+npm run lint
+```
+
+Para aplicar automaticamente as correções disponíveis:
+
+```bash
+npm run lint:fix
+```
+
+## Integração contínua
+
+O projeto utiliza GitHub Actions para executar automaticamente as verificações de qualidade em pushes e pull requests direcionados à branch `main`.
+
+O pipeline executa:
+
+- instalação das dependências;
+- build da aplicação;
+- lint;
+- testes automatizados.
+
+O workflow está disponível em:
+
+```text
+.github/workflows/ci.yml
 ```
 
 ## Scripts
@@ -182,7 +222,9 @@ npm run seed          # Cria o usuário inicial
 npm test              # Executa os testes
 npm run test:coverage # Executa os testes e gera o relatório de cobertura
 npm run lint          # Executa o ESLint
+npm run lint:fix      # Executa o ESLint aplicando correções automáticas
 ```
 
 ## Autor
+
 Marcus Antônio G Silva
