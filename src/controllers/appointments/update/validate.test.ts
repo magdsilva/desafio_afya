@@ -1,0 +1,42 @@
+import { validate, validateAppointmentId } from './validate'
+import { id } from '../../../__test-support__/fixtures'
+
+describe('validateAppointmentId', () => {
+  it('accepts a UUID', () => {
+    expect(validateAppointmentId(id)).toEqual({ value: id })
+  })
+
+  it.each([undefined, null, '', 'invalid', 123, {}, '11111111-1111-1111'])('rejects invalid id %j', (value) => {
+    expect(validateAppointmentId(value).error).toBeDefined()
+  })
+})
+
+describe('validate', () => {
+  const valid = { date: '2026-10-01', time: '09:30', status: 'SCHEDULED' }
+
+  it('accepts valid input', () => {
+    expect(validate(valid)).toEqual({ value: valid })
+  })
+
+  it.each([['date', '01/10/2026'], ['date', '2026-1-1'], ['time', '24:00'], ['time', '12:60'], ['time', '9:00'], ['time', '12:00:00'], ['status', 'INVALID'], ['status', null]])('rejects invalid %s: %j', (field, value) => {
+    const result = validate({ ...valid, [field as string]: value })
+    expect(result.error).toBeDefined()
+    expect(result.error?.details[0].path).toEqual([field])
+  })
+
+  it.each([{}, null, 'invalid', { ...{ date: '2026-10-01', time: '09:30', status: 'SCHEDULED' }, unexpected: true }])('rejects invalid payload %j', (value) => {
+    expect(validate(value).error).toBeDefined()
+  })
+
+  it.each(Object.entries(valid))('accepts a partial update of %s', (field, value) => {
+    expect(validate({ [field]: value }).error).toBeUndefined()
+  })
+
+  it.each(['00:00', '23:59'])('accepts boundary time %s', (time) => {
+    expect(validate({ ...valid, time }).error).toBeUndefined()
+  })
+
+  it.each(['SCHEDULED', 'COMPLETED', 'CANCELED'])('accepts status %s', (status) => {
+    expect(validate({ status }).error).toBeUndefined()
+  })
+})
