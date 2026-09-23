@@ -5,10 +5,14 @@ export const database = new Pool({
   port: Number(process.env.DATABASE_PORT),
   database: process.env.DATABASE_NAME,
   user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
+  password: process.env.DATABASE_PASSWORD
 })
 
-export const connectDatabase = async (): Promise<void> => {
+database.on('error', (error) => {
+  console.error('Unexpected database error:', error)
+})
+
+const connectDatabase = async (): Promise<void> => {
   const client = await database.connect()
 
   try {
@@ -18,3 +22,5 @@ export const connectDatabase = async (): Promise<void> => {
     client.release()
   }
 }
+
+export { connectDatabase }
