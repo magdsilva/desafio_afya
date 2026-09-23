@@ -15,15 +15,25 @@ beforeEach(() => {
 })
 
 describe('Config - database', () => {
-  it('configures the pool with environment variables and registers an error listener', () => {
+  it.each([
+    [undefined, false],
+    ['false', false],
+    ['true', { rejectUnauthorized: false }],
+  ])('configures the pool with DATABASE_SSL=%s and registers an error listener', (databaseSsl, ssl) => {
     jest.replaceProperty(process, 'env', {
       ...process.env, DATABASE_HOST: 'test-host', DATABASE_PORT: '5433',
       DATABASE_NAME: 'test-db', DATABASE_USER: 'test-user', DATABASE_PASSWORD: 'test-password',
     })
+    if (databaseSsl === undefined) {
+      delete process.env.DATABASE_SSL
+    } else {
+      process.env.DATABASE_SSL = databaseSsl
+    }
     // Reevaluate only this module, keeping the pg mock in the outer registry.
     jest.isolateModules(() => { require('./database') })
     expect(PoolMocked).toHaveBeenCalledWith({
       host: 'test-host', port: 5433, database: 'test-db', user: 'test-user', password: 'test-password',
+      ssl,
     })
     const pool = PoolMocked.mock.results[0].value as Pool
     const on = jest.mocked(pool.on)
